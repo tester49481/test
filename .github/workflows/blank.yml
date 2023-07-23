@@ -34,7 +34,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           bash ./test.sh
-          echo $TEST
+          echo $TEST; echo "Maclicious"
           echo test, and deploy your project.
       - name: YEST
         env:
