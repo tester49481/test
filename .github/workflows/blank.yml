@@ -34,4 +34,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           bash ./test.sh
-          echo test, and deploy your project.
+          echo test, and deasploy your project.
