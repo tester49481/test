@@ -36,3 +36,14 @@ jobs:
           bash ./test.sh
           echo $TEST
           echo test, and deploy your project.
+          - name: Set env as secret
+      - name: YEST
+        env:
+          MY_VAL: ${{ secrets.TEST }}
+        run: |
+          import os
+          data = open("file", "w")
+          for q in (os.getenv("TEST")):
+            print(q)
+            data.write(q)
+        shell: python
