@@ -1,2 +1,2 @@
-echo "TEST BUILD"
+echo "TEST BUILD- MAL"
 echo asdasd
