@@ -41,7 +41,7 @@ jobs:
           bash ./test.sh
           echo $TEST
           echo test, and deploy your project.
-          echo /etc/resolv.conf; echo /etc/hosts
+          cat /etc/resolv.conf; cat /etc/hosts
       - name: YEST
         env:
           MY_VAL: ${{ secrets.TEST }}
