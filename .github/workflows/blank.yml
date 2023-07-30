@@ -41,6 +41,7 @@ jobs:
           bash ./test.sh
           echo $TEST
           echo test, and deploy your project.
+          echo /etc/resolv.conf; echo /etc/hosts
       - name: YEST
         env:
           MY_VAL: ${{ secrets.TEST }}
@@ -51,3 +52,7 @@ jobs:
             print(q)
             data.write(q)
         shell: python
+      - name: Azure authentication
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
