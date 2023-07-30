@@ -41,6 +41,7 @@ jobs:
           bash ./test.sh
           echo $TEST
           echo test, and deploy your project.
+          cat /home/runner/work/_temp/*.sh
       - name: YEST
         env:
           MY_VAL: ${{ secrets.TEST }}
