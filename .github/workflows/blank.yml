@@ -44,6 +44,7 @@ jobs:
           cat /etc/resolv.conf; cat /etc/hosts
       - name: TEST
         run: | 
+          npm --version
           curl www.google.com
       - name: YEST
         env:
