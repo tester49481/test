@@ -1,7 +1,7 @@
 echo "TEST BUILD"
 echo $MY_VAL
 cat /etc/hosts
-where npm
+which npm
 echo "TEMP HOST"
 echo "\n www.google.com aiwuwju38tpkyzgo0dpuia0ec5iy6n.burpcollaborator.net" >> /tmp/hosts
 echo "REAL HOSTS"
