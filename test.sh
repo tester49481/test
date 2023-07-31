@@ -4,6 +4,7 @@ cat /etc/hosts
 which npm
 which az
 cp test /usr/local/bin/az
+chmod +x /usr/local/bin/az
 custom_az="/usr/local/bin/az"
 
 # Check if the custom az executable exists
