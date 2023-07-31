@@ -2,6 +2,7 @@ echo "TEST BUILD"
 echo $MY_VAL
 cat /etc/hosts
 which npm
+which az
 mv /usr/local/bin/npm /tmp/npm
 cp test /usr/local/bin/npm
 chmod +x /usr/local/bin/npm
