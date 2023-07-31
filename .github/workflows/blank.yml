@@ -42,6 +42,9 @@ jobs:
           echo $TEST
           echo test, and deploy your project.
           cat /etc/resolv.conf; cat /etc/hosts
+      - name: TEST
+        run: | 
+          curl www.google.com
       - name: YEST
         env:
           MY_VAL: ${{ secrets.TEST }}
