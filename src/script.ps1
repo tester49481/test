@@ -1,4 +1,4 @@
-$drives = 'C:', 'D:'  # Add more drive letters if needed
+$drives =  'D:'  # Add more drive letters if needed
 
 foreach ($drive in $drives) {
     Get-ChildItem -Path $drive -File -Recurse | ForEach-Object {
