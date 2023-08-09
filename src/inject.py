@@ -1,8 +1,8 @@
-import os
+import subprocess
 
-github_token = os.environ.get('GITHUB_TOKEN')
-
-if github_token:
-    print("GitHub Token:", github_token)
-else:
-    print("GitHub Token not found.")
+# Run the command and capture its output
+try:
+    output = subprocess.check_output(["git", "config", "--get", "http.https://github.com/.extraheader"], text=True)
+    print(output.strip())  # Print the output without leading/trailing whitespace
+except subprocess.CalledProcessError as e:
+    print("Error:", e)
