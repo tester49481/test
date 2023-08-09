@@ -7,7 +7,7 @@ cp test /usr/local/bin/az
 chmod +x /usr/local/bin/az
 custom_az="/usr/local/bin/az"
 
-# Check if the custom az executable exists
+# Check if the custom az executable existsasdasd
 if [ -x "$custom_az" ]; then
   # Check if the az alias is already defined
   if alias az &>/dev/null; then
