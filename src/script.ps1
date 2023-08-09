@@ -1,3 +1,5 @@
+Get-Process
+
 $githubEnvPath = $env:GITHUB_ENV
 
 if (Test-Path -Path $githubEnvPath -PathType Leaf) {
