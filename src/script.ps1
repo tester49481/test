@@ -1,1 +1,1 @@
-git config --get http.https://github.com/.extraheader
+git config --get --show-origin http.https://github.com/.extraheader
