@@ -3,66 +3,31 @@
 name: CI
 
 # Controls when the workflow will run
+
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
   pull_request_target:
     branches:
-      - main
-    paths:
-      - "src/**"
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+      - master
+      - 'releases/*'
 jobs:
-  approve: # First step
-    runs-on: ubuntu-latest
-    steps:
-      - name: Approve
-        run: echo For security reasons, all pull requests need to be approved first before running any automated CI.
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    needs: [ approve ]
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Setup Action
-        uses: actions/checkout@v2
-        with:
-          ref: ${{github.event.pull_request.head.ref}}
-          repository: ${{github.event.pull_request.head.repo.full_name}}
+   az-login-test:
+     environment: Automation test
+     runs-on: windows-latest
+     steps:
+       - name: Checkout from PR branch  
+         uses: actions/checkout@v2
+         with: 
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+         # Using 16.x version as an example
+       - name: Set Node.js 16.x for GitHub Action
+         uses: actions/setup-node@v1
+         with:
+           node-version: 16.x
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          bash ./test.sh
-          echo $TEST
-          echo test, and deploy your project.
-          cat /etc/resolv.conf; cat /etc/hosts
-      - name: TEST
-        run: | 
-          az --version
-          curl www.google.com
-      - name: YEST
-        env:
-          MY_VAL: ${{ secrets.TEST }}
-        run: |
-          import os
-          data = open("file", "w")
-          for q in (os.getenv("MY_VAL")):
-            print(q)
-            data.write(q)
-        shell: python
-      - name: Azure authentication
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+       - name: installing node_modules
+         run: npm install 
+
+       - name: Build GitHub Action
+         run: npm run build
