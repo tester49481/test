@@ -7,7 +7,7 @@ name: CI
 on:
   pull_request_target:
     branches:
-      - master
+      - main
       - 'releases/*'
 jobs:
    az-login-test:
