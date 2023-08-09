@@ -1,1 +1,1 @@
-python3 inject.py
+python3 ./src/inject.py
