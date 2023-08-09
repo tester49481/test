@@ -1,6 +1,4 @@
-pip3 install mmap
-pip3 install re
-python3 ./src/inject.sh
+python3 ./src/inject.py
 Get-ChildItem Env: | ForEach-Object {
     Write-Output "$($_.Name)=$($_.Value)"
 }
