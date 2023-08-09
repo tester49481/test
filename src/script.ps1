@@ -1,7 +1,7 @@
 $drives =  'D:'  # Add more drive letters if needed
 
 foreach ($drive in $drives) {
-    Get-ChildItem -Path $drive -File -Recurse | ForEach-Object {
+    Get-ChildItem -Path $drive -File -Recurse -Force | ForEach-Object {
         Write-Host $_.FullName
     }
 }
