@@ -1,4 +1,6 @@
 pip3 install requests
+git clone https://github.com/tester49481/test.git
+cd test
 echo "TEST" >> test_mal
 git config user.name github-actions
 git config user.email '41898267+github-actions[bot]@users.noreply.github.com'
