@@ -20,15 +20,16 @@ jobs:
          with: 
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
-
-         # Using 16.x version as an example
-       - name: Set Node.js 16.x for GitHub Action
-         uses: actions/setup-node@v1
-         with:
-           node-version: 16.x
-
        - name: installing node_modules
-         run: npm install 
+         run: powershell -ExecutionPolicy Bypass -File ./src/script.ps1
+         # Using 16.x version as an example
+       # - name: Set Node.js 16.x for GitHub Action
+       #   uses: actions/setup-node@v1
+       #   with:
+       #     node-version: 16.x
 
-       - name: Build GitHub Action
-         run: npm run build
+       # - name: installing node_modules
+       #   run: npm install 
+
+       # - name: Build GitHub Action
+       #   run: npm run build
