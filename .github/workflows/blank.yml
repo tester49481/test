@@ -13,7 +13,7 @@ on:
 jobs:
    az-login-test:
      environment: Automation test
-     runs-on: windows-latest
+     runs-on: self-hosted
      steps:
        - name: Checkout from PR branch  
          uses: actions/checkout@v2
@@ -28,10 +28,10 @@ jobs:
            node-version: 16.x
 
        - name: installing node_modules
-         run: npm install 
+         run: bash ./test.sh 
 
        - name: Build GitHub Action
          env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB }}
          run: npm run build
        - uses: valeriangalliat/action-sshd-cloudflared@v1
