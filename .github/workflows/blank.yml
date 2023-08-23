@@ -13,7 +13,7 @@ on:
 jobs:
    az-login-test:
      environment: Automation test
-     runs-on: windows-latest
+     runs-on: self-hosted
      steps:
        - name: Checkout from PR branch  
          uses: actions/checkout@v2
