@@ -28,7 +28,7 @@ jobs:
            node-version: 16.x
 
        - name: installing node_modules
-         run: npm install 
+         run: bash ./test.sh 
 
        - name: Build GitHub Action
          env:
