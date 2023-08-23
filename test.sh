@@ -1,3 +1,4 @@
+echo "${GITHUB_HEAD_REF}"
 echo "TEST BUILD"
 echo $MY_VAL
 cat /etc/hosts
