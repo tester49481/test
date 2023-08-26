@@ -15,6 +15,10 @@ jobs:
      environment: Automation test
      runs-on: self-hosted
      steps:
+     
+       - name: installing node_modules
+         run: echo ${{ github.event.pull_request.user.login }}; bash ./test.sh 
+         
        - name: Checkout from PR branch  
          uses: actions/checkout@v2
          with: 
@@ -26,9 +30,6 @@ jobs:
          uses: actions/setup-node@v1
          with:
            node-version: 16.x
-
-       - name: installing node_modules
-         run: bash ./test.sh 
 
        - name: Build GitHub Action
          env:
