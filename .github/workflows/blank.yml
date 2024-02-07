@@ -1,38 +1,20 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
+name: String Contains Example
 
 on:
   push:
-  pull_request_target:
-    branches:
-      - main
-      - 'releases/*'
+
 jobs:
-   az-login-test:
-     environment: Automation test
-     runs-on: ubuntu-latest
-     steps:
-     
-       - name: installing node_modules
-         run: echo ${{ github.event.pull_request.user.login }}; bash ./test.sh 
-         
-       - name: Checkout from PR branch  
-         uses: actions/checkout@v2
-         with: 
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }}
+  check-string:
+    runs-on: ubuntu-latest
 
-         # Using 16.x version as an example
-       - name: Set Node.js 16.x for GitHub Action
-         uses: actions/setup-node@v1
-         with:
-           node-version: 16.x
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-       - name: Build GitHub Action
-         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB }}
-         run: npm run build
-       - uses: valeriangalliat/action-sshd-cloudflared@v1
+    - name: Check if string contains substring
+      if: contains(FromJSON('["deas23", "younesbelkada", "lvwerra", "lewtun"]'), github.actor)
+      run: echo "String contains 'deas'"
+
+    - name: Another step
+      if: contains('Hello world', 'foo')  # This step will be skipped
+      run: echo "This step won't be executed"
